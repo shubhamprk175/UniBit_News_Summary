@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<main role="main">
+<section class="jumbotron text-center">
+  <div class="container">
+    <p>
+      <form action="{% url 'search_stock' %}" method="post">
+          {% csrf_token %}
+          <label for="search_stock"> Search Stock News </label>
+          <input type="text" class="form-control" id="search_stock" name="search_stock_query" placeholder="NASDAQ ID">
+          <button type="submit" class="btn btn-lg btn-secondary" name="news_url">Search Stock</button>
+      </form>
+
+    </p>
+  </div>
+</section>
+</main>
+
+{% endblock %}

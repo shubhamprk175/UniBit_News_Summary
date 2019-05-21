@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="alert alert-dark" role="alert">
+    <center><h4 class="alert-heading">{{song_lyrics.title}}</h4></center>
+    </br></br>
+    {% for item in summary %}
+
+        <center style='width: 100%'>{{item}}</center>
+    {% endfor %}
+</div>
+{% endblock %}

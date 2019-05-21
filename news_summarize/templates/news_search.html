@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<main role="main">
+<section class="jumbotron text-center">
+  <div class="container">
+    <p>
+      <form action="{% url 'search_stock' %}" method="post">
+          {% csrf_token %}
+          <label for="search_stock"> Search Stock News </label>
+          <input type="text" class="form-control" id="search_stock" name="search_stock_query" placeholder="NASDAQ ID">
+          <button type="submit" class="btn btn-lg btn-secondary" name="news_url">Search Stock</button>
+      </form>
+
+    </p>
+  </div>
+</section>
+</main>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row">
+        {% for stock in Stock_News %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          {# <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{stock.thumb_url}}" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%"/></img> #}
+          <div class="card-body">
+            <p class="card-text">{{stock.title}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <form action="{% url 'news_summary' %}" method="post">
+                    {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-secondary" name="news_url" value="{{stock.url}}">Summarize news</button>
+                </form>
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a style="color: inherit" href="{{stock.url}}" target='_blank'>Read Whole news</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
